@@ -29,10 +29,10 @@ concurrency:
 jobs:
   check:
     name: Check formatting & lints
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2604
     steps:
       - name: Checkout repository
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        uses: useblacksmith/checkout@v1 # v7
         with:
           persist-credentials: false
 
@@ -47,9 +47,9 @@ jobs:
 
   build-linux:
     name: Build NH on Linux
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2604
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: useblacksmith/checkout@v1 # v7
         with:
           persist-credentials: false
 
@@ -62,7 +62,7 @@ jobs:
 
   build-darwin:
     name: Build NH on Darwin
-    runs-on: macos-latest
+    runs-on: blacksmith-6vcpu-macos-15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
@@ -77,9 +77,9 @@ jobs:
 
   test-linux:
     name: Test NH on Linux
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2604
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: useblacksmith/checkout@v1 # v7
         with:
           persist-credentials: false
 
@@ -101,7 +101,7 @@ jobs:
 
   test-darwin:
     name: Test NH on Darwin
-    runs-on: macos-latest
+    runs-on: blacksmith-6vcpu-macos-15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
@@ -129,7 +129,7 @@ jobs:
 
   required-checks-passed:
     name: All required jobs passed
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2604
     needs:
       - check
       - build-linux

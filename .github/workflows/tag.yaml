@@ -15,14 +15,14 @@ permissions:
 
 jobs:
   tag:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2604
     if: github.ref == 'refs/heads/master' || github.event_name == 'workflow_dispatch'
     steps:
       - uses: cachix/install-nix-action@75c75c31ebece974e48ebc36b4ad125bd97bd97b # v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: useblacksmith/checkout@v1 # v7
         name: Checkout
         with:
           fetch-depth: 0
@@ -60,13 +60,13 @@ jobs:
       matrix:
         include:
           - platform: x86_64-linux
-            runner: ubuntu-latest
+            runner: blacksmith-4vcpu-ubuntu-2604
             target: x86_64-unknown-linux-gnu
           - platform: aarch64-linux
-            runner: ubuntu-26.04-arm
+            runner: blacksmith-4vcpu-ubuntu-2604-arm
             target: aarch64-unknown-linux-gnu
           - platform: aarch64-darwin
-            runner: macos-latest
+            runner: blacksmith-6vcpu-macos-15
             target: aarch64-apple-darwin
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -98,11 +98,11 @@ jobs:
 
   release:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2604
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: useblacksmith/checkout@v1 # v7
         name: Checkout
         with:
           fetch-depth: 0
