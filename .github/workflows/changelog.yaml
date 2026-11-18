@@ -19,7 +19,7 @@ env:
 
 jobs:
   changelog-check:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2604
 
     steps:
       - name: Override variable if PR is labeled ${{ env.IGNORE_CHECK_LABEL }}
@@ -32,7 +32,7 @@ jobs:
         run: |
           echo "CHANGELOG_REQUIRED=false" >> "$GITHUB_ENV"
 
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: useblacksmith/checkout@v1 # v7
         if: fromJSON(env.CHANGELOG_REQUIRED)
         with:
           persist-credentials: false
